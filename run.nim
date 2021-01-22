@@ -2,7 +2,7 @@ import os
 import sequtils
 import strutils
 import strformat
-import auto_correlate_2d
+import autocorrelate2d
 
 
 let velocityFileName: string = commandLineParams()[0]

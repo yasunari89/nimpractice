@@ -29,8 +29,9 @@ block:
     defer: close(f)
     proc generateContinuousX(stop: float, len: int): seq[float] = 
         var res: seq[float] = @[]
+        let unit: float = stop / float(len)
         for i in 0..(len-1):
-            let v: float = float(i) / float(len)
+            let v: float = float(i) * unit
             add(res, v)
         return res
 

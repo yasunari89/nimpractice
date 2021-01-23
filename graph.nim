@@ -1,7 +1,7 @@
-import plotly
 import os
 import strutils
 import sequtils
+import plotly
 
 
 let dataFileName: string = commandLineParams()[0]

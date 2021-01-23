@@ -24,10 +24,18 @@ const widthGridNum: int = 1201
 echo fmt"GRIDS: {heightGridNum} x {widthGridNum}"
 echo "NOW CALCULATING..."
 
-var output: string = ""
 block:
     let f: File = open(outputFileName, fmWrite)
     defer: close(f)
-    for v in fasterAutoCorrelate2D1201x1201(velocity):
-        add(output, fmt"{v} ")
-    writeLine(f, output)
+    proc generateContinuousX(stop: float, len: int): seq[float] = 
+        var res: seq[float] = @[]
+        for i in 0..(len-1):
+            let v: float = float(i) / float(len)
+            add(res, v)
+        return res
+
+    let x: seq[float] = generateContinuousX(8.0, 1201)
+    let y: seq[float] = toSeq(fasterAutoCorrelate2D1201x1201(velocity))
+
+    for i in 0..1200:
+        writeLine(f, fmt"{x[i]} {y[i]}")
